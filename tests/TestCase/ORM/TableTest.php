@@ -4580,7 +4580,7 @@ class TableTest extends TestCase
         $associations = new AssociationCollection();
 
         $hasManyArticles = $this->getMockBuilder('Cake\ORM\Association\HasMany')
-            ->setMethods(['target'])
+            ->setMethods(['getTarget'])
             ->setConstructorArgs([
                 'articles',
                 [
@@ -4591,7 +4591,7 @@ class TableTest extends TestCase
                 ]
             ])
             ->getMock();
-        $hasManyArticles->method('target')->willReturn($articles);
+        $hasManyArticles->method('getTarget')->willReturn($articles);
 
         $associations->add('articles', $hasManyArticles);
 

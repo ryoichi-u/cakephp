@@ -167,7 +167,7 @@ class ExceptionRenderer implements ExceptionRendererInterface
         }
 
         $message = $this->_message($exception, $code);
-        $url = $this->controller->request->here();
+        $url = $this->controller->request->getRequestTarget();
 
         if (method_exists($exception, 'responseHeader')) {
             $this->controller->response->header($exception->responseHeader());

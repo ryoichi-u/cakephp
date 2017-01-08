@@ -516,7 +516,7 @@ class TreeBehavior extends Behavior
         return $query->formatResults(function ($results) use ($options) {
             $options += [
                 'keyPath' => $this->_getPrimaryKey(),
-                'valuePath' => $this->_table->displayField(),
+                'valuePath' => $this->_table->getDisplayField(),
                 'spacer' => '_',
             ];
 
@@ -539,7 +539,7 @@ class TreeBehavior extends Behavior
      */
     public function removeFromTree(EntityInterface $node)
     {
-        return $this->_table->connection()->transactional(function () use ($node) {
+        return $this->_table->getConnection()->transactional(function () use ($node) {
             $this->_ensureFields($node);
 
             return $this->_removeFromTree($node);
@@ -604,7 +604,7 @@ class TreeBehavior extends Behavior
             return false;
         }
 
-        return $this->_table->connection()->transactional(function () use ($node, $number) {
+        return $this->_table->getConnection()->transactional(function () use ($node, $number) {
             $this->_ensureFields($node);
 
             return $this->_moveUp($node, $number);
@@ -692,7 +692,7 @@ class TreeBehavior extends Behavior
             return false;
         }
 
-        return $this->_table->connection()->transactional(function () use ($node, $number) {
+        return $this->_table->getConnection()->transactional(function () use ($node, $number) {
             $this->_ensureFields($node);
 
             return $this->_moveDown($node, $number);
@@ -802,7 +802,7 @@ class TreeBehavior extends Behavior
      */
     public function recover()
     {
-        $this->_table->connection()->transactional(function () {
+        $this->_table->getConnection()->transactional(function () {
             $this->_recoverTree();
         });
     }
